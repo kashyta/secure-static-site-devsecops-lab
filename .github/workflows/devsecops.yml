@@ -51,7 +51,8 @@ jobs:
       # -------------------------------
       - name: Install GitLeaks
         run: |
-          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_amd64.deb -o gitleaks.deb
+          sudo dpkg -i gitleaks.deb
           chmod +x gitleaks
           sudo mv gitleaks /usr/local/bin/
 
