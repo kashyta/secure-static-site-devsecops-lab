@@ -18,18 +18,49 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up scan folder
+      - name: Create scans folder
         run: mkdir -p scans
+
+      # -------------------------------
+      #    Install Trivy
+      # -------------------------------
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install wget apt-transport-https gnupg lsb-release -y
+          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+          echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update
+          sudo apt-get install trivy -y
 
       - name: Run Trivy filesystem scan
         run: trivy fs . > scans/trivy-${{ env.TIMESTAMP }}.txt
 
+      # -------------------------------
+      #    Install Semgrep
+      # -------------------------------
+      - name: Install Semgrep
+        run: |
+          pip install semgrep
+
       - name: Run Semgrep scan
         run: semgrep scan --config auto > scans/semgrep-${{ env.TIMESTAMP }}.txt
+
+      # -------------------------------
+      #    Install GitLeaks
+      # -------------------------------
+      - name: Install GitLeaks
+        run: |
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+          chmod +x gitleaks
+          sudo mv gitleaks /usr/local/bin/
 
       - name: Run GitLeaks scan
         run: gitleaks detect --source . --no-banner > scans/gitleaks-${{ env.TIMESTAMP }}.txt
 
+      # -------------------------------
+      #    Upload scan reports
+      # -------------------------------
       - name: Upload Scan Reports
         uses: actions/upload-artifact@v4
         with:
