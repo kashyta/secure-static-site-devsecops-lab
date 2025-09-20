@@ -1,7 +1,5 @@
 name: Security Scan
 
-name: DevSecOps Scan
-
 on:
   push:
     branches:
