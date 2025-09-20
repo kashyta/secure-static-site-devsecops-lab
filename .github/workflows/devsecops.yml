@@ -1,0 +1,38 @@
+name: Security Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set timestamp
+        run: echo "TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')" >> $GITHUB_ENV
+
+      - name: Create scans folder
+        run: mkdir -p scans
+
+      - name: Run Trivy (Filesystem scan)
+        run: trivy fs . > scans/trivy-report-${{ env.TIMESTAMP }}.txt
+
+      - name: Run Semgrep
+        run: semgrep scan . > scans/semgrep-report-${{ env.TIMESTAMP }}.txt
+
+      - name: Run GitLeaks
+        run: gitleaks detect --source . > scans/gitleaks-report-${{ env.TIMESTAMP }}.txt
+
+      - name: Upload Scan Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-reports-${{ env.TIMESTAMP }}
+          path: scans/

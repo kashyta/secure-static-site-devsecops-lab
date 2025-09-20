@@ -29,24 +29,20 @@ Scan reports are saved in the `scans/` folder with timestamps and uploaded as Gi
 
 ##  Folder Structure
 
-secure-static-site-devsecops-lab/ 
-├── scans/ # Timestamped scan reports 
-├── infrastructure/ # Terraform modules 
-    ├── ec2-instance/ 
-    ├── s3-static-site/ 
-    ├── iam-roles/
-├── website
-    └── index.html
-    └── error.html
-├── .github/ 
-   └── workflows/ 
-     └── devsecops.yml # GitHub Actions pipeline 
-├── install-tools.sh # Manual tool installer (optional) 
-├── .gitignore # Excludes Terraform state and secrets 
-├── SECURITY.md # Explains how each tool protects the project 
-├── README.md # You're reading it! 
-
-
+```text
+secure-static-site-devsecops-lab/
+├── scans/                  # Timestamped scan reports from Trivy, Semgrep, GitLeaks
+├── infrastructure/         # Terraform modules
+│   ├── ec2-instance/       # EC2 setup for manual testing
+│   ├── s3-static-site/     # S3 bucket hosting static site
+│   ├── iam-roles/          # IAM roles and policies
+├── .github/
+│   └── workflows/
+│       └── devsecops.yml   # GitHub Actions pipeline
+├── install-tools.sh        # Optional script for manual tool installation
+├── .gitignore              # Excludes Terraform state, secrets, and large files
+├── SECURITY.md             # Explains how each tool protects the project
+├── README.md               # Project overview and setup instructions
 
 ---
 
@@ -58,12 +54,12 @@ secure-static-site-devsecops-lab/
    cd secure-static-site-devsecops-lab
 
 2. Initialize Terraform:
-
+    ```bash
     terraform init
     terraform apply
 
 3. Push code to GitHub to trigger scans:
-
+    ```bash
     git add .
     git commit -m "Initial commit"
     git push origin main
