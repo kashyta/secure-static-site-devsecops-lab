@@ -55,9 +55,11 @@ jobs:
           | grep "browser_download_url.*linux_amd64.tar.gz" \
           | cut -d '"' -f 4 \
           | xargs curl -L -o gitleaks.tar.gz
+
           tar -xzf gitleaks.tar.gz
           chmod +x gitleaks
-          sudo mv gitleaks /usr/local/bin/
+          sudo mv gitleaks /usr/local/bin/gitleaks
+
 
       - name: Run GitLeaks scan
         run: gitleaks detect --source . --no-banner > scans/gitleaks-${{ env.TIMESTAMP }}.txt
