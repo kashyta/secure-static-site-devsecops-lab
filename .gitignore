@@ -1,0 +1,21 @@
+# Ignore Terraform state and backup files
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+*.log
+
+# Ignore sensitive files
+*.pem
+*.key
+*.env
+
+# Ignore scan reports (optional if you don’t want to track them)
+scans/*.txt
+
+# Ignore OS and editor artifacts
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
