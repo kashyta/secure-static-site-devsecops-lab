@@ -31,6 +31,7 @@ Scan reports are saved with timestamps and uploaded as GitHub Action artifacts.
 
 ```text
 secure-static-site-devsecops-lab/
+├── screenshots             # screenshots from fusion-dessert-static-site.s3.us-west-2.amazonaws.com
 ├── website                 # HTML pages and images for static website 
 ├── infrastructure/         # Terraform modules
 │   ├── ec2-instance/       # EC2 setup for manual testing
@@ -38,7 +39,9 @@ secure-static-site-devsecops-lab/
 │   ├── iam-roles/          # IAM roles and policies
 ├── .github/
 │   └── workflows/
-│       └── devsecops.yml   # GitHub Actions pipeline
+│       └── devsecops.yml   # GitHub Actions pipeline for security scan
+|       └── s3-deploy.yml   # GitHub Actions pipeline to upload files on S3 
+|       └── ec2-scan.yml    # GitHub Actions pipeline for vulnerability scans on ec2 instance
 ├── install-tools.sh        # Optional script for manual tool installation
 ├── .gitignore              # Excludes Terraform state, secrets, and large files
 ├── SECURITY.md             # Explains how each tool protects the project
