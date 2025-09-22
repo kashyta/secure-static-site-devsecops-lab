@@ -1,0 +1,34 @@
+name: EC2 Security Scan & Metrics Export
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH into EC2 and run scan
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Install Nikto if not present
+            if [ ! -d "$HOME/nikto" ]; then
+              sudo yum install perl git -y
+              git clone https://github.com/sullo/nikto.git ~/nikto
+            fi
+
+            # Run Nikto scan
+            perl ~/nikto/nikto.pl -host http://fusion-dessert-static-site.s3-website-us-west-2.amazonaws.com/ -output /tmp/nikto_scan.txt
+
+            # Create Prometheus metrics
+            vuln_count=$(grep -c "OSVDB" /tmp/nikto_scan.txt)
+            echo "# HELP nikto_vulnerabilities Number of vulnerabilities found by Nikto" > /var/lib/node_exporter/nikto.prom
+            echo "# TYPE nikto_vulnerabilities gauge" >> /var/lib/node_exporter/nikto.prom
+            echo "nikto_vulnerabilities $vuln_count" >> /var/lib/node_exporter/nikto.prom
+
+            # Ensure Prometheus can read it
+            sudo chown node_exporter:node_exporter /var/lib/node_exporter/nikto.prom
