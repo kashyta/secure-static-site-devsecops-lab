@@ -1,0 +1,24 @@
+name: Deploy Website to S3
+
+on:
+  push:
+    branches: [ main ]  # Adjust if your deployment branch is different
+
+jobs:
+  deploy-to-s3:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Sync website folder to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --delete
+        env:
+          AWS_S3_BUCKET: fusion-dessert-static-site # your S3 bucket name
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-west-2  # Change to your bucket's region
+          SOURCE_DIR: website

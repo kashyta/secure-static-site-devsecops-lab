@@ -23,7 +23,7 @@ Security tools are integrated via GitHub Actions to run on every push and pull r
 | Semgrep   | Performs static code analysis to catch insecure patterns |
 | GitLeaks  | Detects hardcoded secrets and credentials |
 
-Scan reports are saved in the `scans/` folder with timestamps and uploaded as GitHub Action artifacts.
+Scan reports are saved with timestamps and uploaded as GitHub Action artifacts.
 
 ---
 
@@ -31,7 +31,7 @@ Scan reports are saved in the `scans/` folder with timestamps and uploaded as Gi
 
 ```text
 secure-static-site-devsecops-lab/
-├── scans/                  # Timestamped scan reports from Trivy, Semgrep, GitLeaks
+├── website                 # HTML pages and images for static website 
 ├── infrastructure/         # Terraform modules
 │   ├── ec2-instance/       # EC2 setup for manual testing
 │   ├── s3-static-site/     # S3 bucket hosting static site
@@ -43,9 +43,9 @@ secure-static-site-devsecops-lab/
 ├── .gitignore              # Excludes Terraform state, secrets, and large files
 ├── SECURITY.md             # Explains how each tool protects the project
 ├── README.md               # Project overview and setup instructions
+```
 
 ---
-
 
 ##  Setup Instructions
 

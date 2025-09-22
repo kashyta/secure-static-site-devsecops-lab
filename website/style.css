@@ -1,0 +1,132 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+  background-color: #fff8f0;
+  color: #4b2e2e;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 30px 0;
+  background: linear-gradient(to right, #f9c74f, #f9844a);
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-family: 'Georgia', serif;
+}
+
+header p {
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* Navigation Link */
+header a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  background-color: #4b2e2e;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+header a:hover {
+  background-color: #6b3f3f;
+}
+
+/* Main Content */
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Section Titles */
+.recipe h2 {
+  font-size: 1.8rem;
+  margin: 20px 0 10px;
+  color: #b85c38;
+  border-bottom: 2px solid #f9c74f;
+  padding-bottom: 5px;
+}
+
+/* Subtitles */
+.recipe h3 {
+  font-size: 1.4rem;
+  margin-top: 15px;
+  color: #6b3f3f;
+}
+
+/* Lists */
+.recipe ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.recipe ol {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+/* Paragraphs */
+.recipe p {
+  margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #6b3f3f;
+  border-top: 1px solid #f9c74f;
+}
+
+/* Images (for future use) */
+.recipe img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 20px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Featured Recipe List */
+.featured ul {
+  list-style: none;
+  padding: 0;
+}
+
+.featured ul li {
+  margin: 10px 0;
+}
+
+.featured ul li a {
+  text-decoration: none;
+  color: #b85c38;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.featured ul li a:hover {
+  color: #6b3f3f;
+  text-decoration: underline;
+}
