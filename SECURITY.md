@@ -1,10 +1,10 @@
-# 🔐 Security Overview
+# Security Overview
 
 This project integrates automated security scanning tools to ensure infrastructure-as-code (IaC), application logic, and version control remain secure and compliant. The following tools are used in our GitHub Actions workflow:
 
 ---
 
-## 🛡️ Trivy – Vulnerability Scanner
+## Trivy – Vulnerability Scanner
 
 **Purpose:**  
 Trivy scans the filesystem, containers, and IaC (Terraform, Dockerfiles, etc.) for known vulnerabilities (CVEs), misconfigurations, and exposed secrets.
@@ -20,7 +20,7 @@ Filesystem scan (`trivy fs .`) triggered on every push and pull request.
 
 ---
 
-## 🧠 Semgrep – Static Code Analysis
+## Semgrep – Static Code Analysis
 
 **Purpose:**  
 Semgrep performs lightweight static analysis to catch insecure coding patterns, logic flaws, and enforce custom security rules.
@@ -36,7 +36,7 @@ Source code scan (`semgrep scan .`) triggered on every push and pull request.
 
 ---
 
-## 🔍 GitLeaks – Secret Detection
+## GitLeaks – Secret Detection
 
 **Purpose:**  
 GitLeaks scans your repository for hardcoded secrets, API keys, tokens, and credentials before they reach production.
@@ -51,7 +51,7 @@ Repository scan (`gitleaks detect --source .`) triggered on every push and pull 
 
 ---
 
-## 🚨 Continuous Monitoring
+## Continuous Monitoring
 
 All scans are automated via GitHub Actions and run on:
 - Every push to `main`
